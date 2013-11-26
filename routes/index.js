@@ -16,11 +16,11 @@ exports.fetchdb = function(req, res){
     var allParticipants = [];
 
         // db.testparticipants.find({PRESENT: 'YES'}, function(err, participant){
-        db.testparticipants.find({$and: [{PRESENT: 'YES'}, {COMPANYNAME: new RegExp('maybank', 'i')}]}, function(err, participant){
+        db.testparticipants.find({$and: [{PRESENT: 'YES'}, {COMPANYNAME: {$not: new RegExp('maybank', 'i')} }]}, function(err, participant){
         // db.finallist.find({}, function(err, participant){ 
             participant.forEach(function(member,index){
                 allParticipants[index] = {firstname: member.FIRSTNAME, lastname: member.LASTNAME, companyname: member.COMPANYNAME};
                 });
-            res.send((allParticipants));
+            res.send((participant));
         });    
 };

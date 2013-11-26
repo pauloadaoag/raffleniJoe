@@ -13,6 +13,7 @@
     "stylus": "*",
     "mongojs": "~0.9.7",
     "ejs": "~0.8.5",
-    "mongoose": "~3.8.1"
+    "mongoose": "~3.8.1",
+    "socket.io": "~0.9.16"
   }
 }

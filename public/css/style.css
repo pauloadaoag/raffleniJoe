@@ -53,3 +53,41 @@ canvas {
     color:#fff;
     margin-right:1px;
 }
+
+
+body {
+                font-family: Roboto Condensed;
+                color: #333;
+            }
+
+            .page {
+                width: 1000px;
+                margin: 30px auto 0;
+            }
+
+            h1 {
+                text-align: center;
+                font-size: 64px;
+            }
+
+            .displays {
+            }
+
+            .flapper {
+                margin-bottom: 2px;
+                text-align: center;
+            }
+
+            .inputarea {
+                margin: 24px 0;
+            }
+
+            input.typesomething {
+                font-family: Roboto Condensed;
+                font-size: 24px;
+                width: 500px;
+                padding: 14px;
+                border: 0;
+                background-color: #EEE;
+                color: #333;
+            }
