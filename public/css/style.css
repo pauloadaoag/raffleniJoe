@@ -1,0 +1,55 @@
+div {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+html, body {
+	height:100%;
+    overflow: hidden;
+}
+body {
+	font-family: 'Electrolize', Arial, sans-serif;
+	font-weight: 400;
+	font-size: 50px;
+	color: #3d3d3d;
+	width: 100%;
+	background: #eeeeee;
+	overflow-x: hidden;
+	overflow-y: auto;
+    text-align: center;
+}
+
+#congrats {
+    margin-top: 50px
+}
+
+canvas {
+	display: block;
+    position: absolute;
+    z-index: -1;
+}
+
+#picker {
+    background-color: #dedede;
+}
+
+#maybanklogo {
+    padding:0;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+#text {
+    cursor:pointer;
+    overflow:hidden;
+    font:40px/1 monospace;
+
+}
+#text span {
+    display:block;
+    float:left;
+    background:#444;
+    color:#fff;
+    margin-right:1px;
+}
