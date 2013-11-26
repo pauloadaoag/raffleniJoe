@@ -16,7 +16,7 @@ exports.fetchdb = function(req, res){
     var allParticipants = [];
 
         // db.testparticipants.find({PRESENT: 'YES'}, function(err, participant){
-        db.testparticipants.find({$and: [{PRESENT: 'YES'}, {COMPANYNAME: {$not: new RegExp('maybank', 'i')} }]}, function(err, participant){
+        db.testparticipants.find({$and: [{PRESENT: 'YES', winner: {$ne: true}}, {COMPANYNAME: {$not: new RegExp('maybank', 'i')} }]}, function(err, participant){
         // db.finallist.find({}, function(err, participant){ 
             participant.forEach(function(member,index){
                 allParticipants[index] = {firstname: member.FIRSTNAME, lastname: member.LASTNAME, companyname: member.COMPANYNAME};
@@ -24,3 +24,18 @@ exports.fetchdb = function(req, res){
             res.send((participant));
         });    
 };
+
+
+exports.markAsWinner = function(email, callback){
+    var d = new Date();
+    db.testparticipants.update({'EMAILADDRESS':email}, {$set:{winner:true, timeWon:d}}, callback  )
+
+}
+
+exports.fetchWinners = function(callback){
+    db.testparticipants.find({winner: true}).sort({timeWon:1}, callback);
+}
+
+exports.clearWinners = function(callback){
+    db.testparticipants.update({_id: {$ne:null }}, {$set:{winner:false, timeWon:null}}, {multi:true}, callback  )    
+}

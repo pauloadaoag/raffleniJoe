@@ -42,7 +42,11 @@ app.post('/fetchdb', routes.fetchdb);
 
 
 app.get('/control', express.basicAuth('express','irisjoe'), function(req, res){
-  res.render('control', { title: 'Express2' });
+  
+  routes.fetchWinners(function(err, data){
+    res.render('control', { title: 'Express2', winners:data });
+    
+  })
 })
 
 
@@ -69,7 +73,14 @@ io.sockets.on('connection', function (socket) {
     })
 
     socket.on('new-winner', function(data){
+      routes.markAsWinner(data.EMAILADDRESS);
       io.sockets.emit('new-winnerfound',data);
+    })
+
+    socket.on('clear-winners', function(data){
+      routes.clearWinners(function(err){
+
+      });
     })
 
   });

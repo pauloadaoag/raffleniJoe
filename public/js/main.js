@@ -27,7 +27,7 @@ var opts = {
 };
     
 $(document).ready(function(){
-    fetchDB();
+    
     $(document).keypress(function(e) {
         if(e.which == 13) {
             pickWinner();
@@ -179,6 +179,7 @@ function fetchDB() {
         method: "POST",
         url: "/fetchdb",
     }).done(function(msg) { 
+        participants = [];
         msg.forEach(function(member, index) {
             member.won = false;
             participants.push(member);
@@ -186,7 +187,12 @@ function fetchDB() {
     });   
 };
 
+var pickWinInProgress = false;
+
 function pickWinner(){
+    if (pickWinInProgress) return;
+    fetchDB();
+    pickWinInProgress = true;
     var maybankregex = /maybank/i;
     participants = participants.filter(function(a){return (!a.won)});
     participants = participants.filter(function(a){return !(maybankregex.test(a.COMPANYNAME))});
@@ -217,13 +223,14 @@ function pickWinner(){
 
 function airportStyle(){
         counter++;
-        if(counter==20) //end of first run
+        if(counter==2) //end of first run
         {
             clearInterval(airportTimer);
             increment = 0;
             counter = 0;
             //$('#company').text(totoongWinner.company);
             startConfetti();
+            pickWinInProgress = false;
             // $('#drums').jPlayer("stop");
             // $('#applause').jPlayer("play");
             // document.getElementById('picker').style.visibility = 'visible';
